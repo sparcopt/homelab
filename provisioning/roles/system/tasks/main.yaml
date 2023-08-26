@@ -1,0 +1,3 @@
+# - import_tasks: add_cmdline_params.yaml
+# - import_tasks: set_static_ip.yaml
+- import_tasks: set_ssh_keys.yaml

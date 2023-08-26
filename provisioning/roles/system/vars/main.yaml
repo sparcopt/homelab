@@ -1,0 +1,11 @@
+cmdline_file_path: /tmp/cmdline.txt
+cmdline_params:
+  - cgroup_enable=memory
+  - cgroup_memory=1
+
+
+# dhcpcd_config_file: /etc/dhcpcd.conf
+
+dhcpcd_file_path: /tmp/dhcpcd.conf
+
+sshd_file_path: /etc/ssh/sshd_config

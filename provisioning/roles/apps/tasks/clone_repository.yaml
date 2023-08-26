@@ -1,0 +1,4 @@
+- name: Git checkout
+  ansible.builtin.git:
+    repo: 'https://github.com/sparcopt/homelab.git'
+    dest: /opt/homelab/
