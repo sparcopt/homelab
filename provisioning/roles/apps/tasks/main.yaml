@@ -1,1 +1,2 @@
 - import_tasks: clone_repository.yaml
+- import_tasks: make.yaml

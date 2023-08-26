@@ -1,0 +1,4 @@
+- name: Run
+  make:
+    chdir: /opt/homelab/apps
+    target: run-infra
