@@ -1,0 +1,8 @@
+exclude_paths:
+  - .config/
+  - .github/
+  - apps/
+  - requirements.yml
+
+skip_list:
+  - yaml[new-line-at-end-of-file]

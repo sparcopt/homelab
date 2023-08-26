@@ -1,4 +1,4 @@
 - name: Run
-  make:
+  community.general.make:
     chdir: /opt/homelab/apps
     target: run-infra

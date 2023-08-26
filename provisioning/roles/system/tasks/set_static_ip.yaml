@@ -1,5 +1,5 @@
 - name: Set static IP
-  template:
+  ansible.builtin.template:
     src: dhcpcd.j2
     dest: "{{ dhcpcd_file_path }}"
     mode: "0644"

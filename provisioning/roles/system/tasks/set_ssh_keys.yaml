@@ -1,24 +1,24 @@
 - name: Set ssh key
-  authorized_key:
+  ansible.posix.authorized_key:
     user: "{{ ssh.username }}"
     state: present
     key: "{{ lookup('file', '{{ ssh.key_path }}') }}"
 
 - name: Disallow password authentication
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: "^PasswordAuthentication"
     line: "PasswordAuthentication no"
     state: present
 
 - name: Disable root login
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: "^PermitRootLogin"
     line: "PermitRootLogin no"
     state: present
 
 - name: Stop and Start ssh
-  service:
+  ansible.builtin.service:
     name: ssh
     state: restarted
