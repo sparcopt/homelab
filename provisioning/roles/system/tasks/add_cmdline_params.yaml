@@ -1,5 +1,5 @@
-- name: Add cmdline params to allow Docker to read RAM usage  
-  lineinfile:
+- name: Add cmdline params to allow Docker to read RAM usage
+  ansible.builtin.lineinfile:
     path: "{{ cmdline_file_path }}"
     regexp: '^(?!.*?{{ item }})(.*)$'
     line: '\1 {{ item }}'

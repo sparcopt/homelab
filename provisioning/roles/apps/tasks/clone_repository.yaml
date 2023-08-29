@@ -1,4 +1,5 @@
-- name: Git checkout
+- name: Git checkout # noqa: latest
   ansible.builtin.git:
     repo: 'https://github.com/sparcopt/homelab.git'
     dest: /opt/homelab/
+    update: false

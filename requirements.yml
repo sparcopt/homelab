@@ -1,0 +1,5 @@
+# This file must be at the root level so that ansible-lint can see it
+
+collections:
+  - ansible.posix
+  - community.general

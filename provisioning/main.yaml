@@ -1,4 +1,4 @@
-- name: full instalation playbook
+- name: Full instalation playbook
   hosts: dhcphomeserver
   roles:
     - role: system
@@ -7,4 +7,4 @@
 - name: Test with SSH
   hosts: homeserver
   roles:
-     - role: apps
+    - role: apps

@@ -1,2 +1,4 @@
-- import_tasks: clone_repository.yaml
-- import_tasks: make.yaml
+- name: Clone repository
+  ansible.builtin.import_tasks: clone_repository.yaml
+- name: Run make comman
+  ansible.builtin.import_tasks: make.yaml

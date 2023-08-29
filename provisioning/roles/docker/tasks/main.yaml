@@ -1,5 +1,5 @@
 - name: Ensure old versions of Docker are not installed
-  package:
+  ansible.builtin.package:
     name:
       - docker
       - docker-engine
@@ -11,7 +11,7 @@
       - ca-certificates
       - curl
       - gnupg
-    state: latest
+    state: latest # noqa package-latest
     update_cache: true
 
 - name: Add signing key
@@ -20,7 +20,7 @@
     state: present
 
 - name: Set DPKG architecture
-  set_fact:
+  ansible.builtin.set_fact:
     dpkg_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
 
 - name: Add repository into sources list
@@ -37,13 +37,11 @@
       - containerd.io
       - docker-buildx-plugin
       - docker-compose-plugin
-    state: latest
+    state: latest # noqa package-latest
     update_cache: true
 
 - name: Check docker is active
-  service:
+  ansible.builtin.service:
     name: docker
     state: started
-    enabled: yes
-
-        
+    enabled: true
