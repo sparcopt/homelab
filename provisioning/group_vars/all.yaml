@@ -6,4 +6,4 @@ dhcpcd:
 
 ssh:
   username: testuser
-  key_path: "~/.ssh/raspiviseu_rsa.pub"
+  key_path: "~/.ssh/id_rsa.pub"

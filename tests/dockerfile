@@ -1,0 +1,24 @@
+FROM debian
+
+ARG SSH_PORT
+ARG SSH_USERNAME
+ARG SSH_PASSWORD
+
+RUN apt update
+RUN apt install openssh-server nano sudo git -y
+
+# Install Python for Ansible
+RUN apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev wget libbz2-dev -y
+RUN apt install python3 -y
+
+# SSH configurations
+RUN sed -i 's/^#Port .*/Port '"${SSH_PORT}"'/' /etc/ssh/sshd_config
+RUN sed -i 's/^#PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+
+RUN useradd -m ${SSH_USERNAME} -p "$(openssl passwd -1 ${SSH_PASSWORD})" && usermod -aG sudo ${SSH_USERNAME}
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["tail", "-f", "/dev/null" ]

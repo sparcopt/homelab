@@ -1,0 +1,13 @@
+services:
+  debian:
+    privileged: true # required to enable docker in docker
+    build:
+      context: .
+      args:
+        SSH_PORT: 2222
+        SSH_USERNAME: testuser
+        SSH_PASSWORD: 123
+    ports:
+      - "2222:2222"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # required to enable docker in docker
