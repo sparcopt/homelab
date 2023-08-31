@@ -5,5 +5,5 @@ dhcpcd:
   dns_addresses: [8.8.8.8, 8.8.4.4]
 
 ssh:
-  username: testuserMOCK
+  username: testuser
   key_path: "~/.ssh/id_rsa.pub"
