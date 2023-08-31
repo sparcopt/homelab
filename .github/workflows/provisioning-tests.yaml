@@ -1,0 +1,18 @@
+name: provisioning-tests
+on: [push]
+
+jobs:
+  provisioning-tests:
+    name: Provisioning tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Build test environment
+        run: make build-test-environment
+      - name: Generate test SSH key
+        run: make generate-host-ssh-key
+      - name: Run provisioning test playbook
+        run: make run-test-playbook
+      - name: Assert docker containers are running
+        run: make test-docker-containers
