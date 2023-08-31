@@ -13,6 +13,6 @@ jobs:
       - name: Generate test SSH key
         run: make generate-host-ssh-key
       - name: Run provisioning test playbook
-        run: make run-test-playbook
+        run: make run-mock-playbook
       - name: Assert docker containers are running
         run: make test-docker-containers
