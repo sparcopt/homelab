@@ -6,4 +6,4 @@
     backrefs: true
   loop: "{{ cmdline_params }}"
   notify:
-  - Reboot
+    - Reboot

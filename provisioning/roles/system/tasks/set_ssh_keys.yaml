@@ -18,5 +18,5 @@
     line: "PermitRootLogin no"
     state: present
   notify:
-  - Reboot
-  - Restart SSH
+    - Reboot
+    - Restart SSH

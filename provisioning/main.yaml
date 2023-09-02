@@ -17,5 +17,4 @@
 - name: Install applications
   hosts: homeserver
   roles:
-    - role: docker
     - role: apps

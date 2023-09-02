@@ -4,4 +4,4 @@
     dest: "{{ dhcpcd_file_path }}"
     mode: "0644"
   notify:
-  - Reboot
+    - Reboot
