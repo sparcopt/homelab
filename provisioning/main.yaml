@@ -1,10 +1,21 @@
-- name: Full instalation playbook
+- name: Setup system
   hosts: dhcphomeserver
   roles:
     - role: system
     - role: docker
 
-- name: Test with SSH
+- name: Wait for system to complete reboot
+  hosts: local
+  tasks:
+    - name: Wait for reboot
+      ansible.builtin.wait_for:
+        port: 2222
+        host: 127.0.0.1 # replace this with var
+        delay: 10
+        timeout: 60
+
+- name: Install applications
   hosts: homeserver
   roles:
+    - role: docker
     - role: apps

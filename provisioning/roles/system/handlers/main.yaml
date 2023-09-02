@@ -1,0 +1,14 @@
+# Tasks defined here will run in the order they are defined
+# They will run once per playbook and at the very end
+
+# Only reboot on production
+- name: Reboot
+  when: inventory_dir.split('/')[-1] == 'production'
+  ansible.builtin.reboot:
+
+# We can't reboot our CI container, restart SSH instead
+- name: Restart SSH
+  when: inventory_dir.split('/')[-1] != 'production'
+  ansible.builtin.service:
+    name: ssh
+    state: restarted

@@ -17,8 +17,6 @@
     regexp: "^PermitRootLogin"
     line: "PermitRootLogin no"
     state: present
-
-- name: Stop and Start ssh
-  ansible.builtin.service:
-    name: ssh
-    state: restarted
+  notify:
+  - Reboot
+  - Restart SSH
