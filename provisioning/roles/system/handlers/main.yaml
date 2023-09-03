@@ -3,12 +3,26 @@
 
 # Only reboot on production
 - name: Reboot
+  listen: "Reboot"
   when: inventory_dir.split('/')[-1] == 'production'
-  ansible.builtin.reboot:
+  shell: 'sleep 1 && shutdown -r now "Reboot triggered by Ansible" && sleep 1'
+  async: 1
+  poll: 0
+  ignore_errors: true
 
 # We can't reboot our CI container, restart SSH instead
 - name: Restart SSH
+  listen: "Reboot"
   when: inventory_dir.split('/')[-1] != 'production'
   ansible.builtin.service:
     name: ssh
     state: restarted
+
+- name: Wait for reboot
+  listen: "Reboot"
+  local_action:
+    module: ansible.builtin.wait_for
+    port: "{{ ssh.port }}"
+    host: "{{ static_ip_address_to_assign }}"
+    delay: 10
+    timeout: 60

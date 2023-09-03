@@ -3,5 +3,4 @@
     src: dhcpcd.j2
     dest: "{{ dhcpcd_file_path }}"
     mode: "0644"
-  notify:
-    - Reboot
+  notify: "Reboot"

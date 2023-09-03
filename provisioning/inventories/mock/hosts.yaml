@@ -3,6 +3,7 @@ dhcphomeserver:
     dhcp_debian_container:
       ansible_host: localhost
       ansible_ssh_pass: 123
+      static_ip_address_to_assign: 127.0.0.1
 
 homeserver:
   hosts:
