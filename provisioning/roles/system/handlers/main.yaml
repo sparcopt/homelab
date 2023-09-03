@@ -2,13 +2,13 @@
 # They will run once per playbook and at the very end
 
 # Only reboot on production
-- name: Reboot
+- name: Reboot # noqa no-changed-when
   listen: "Reboot"
   when: inventory_dir.split('/')[-1] == 'production'
-  shell: 'sleep 1 && shutdown -r now "Reboot triggered by Ansible" && sleep 1'
+  ansible.builtin.shell: 'sleep 1 && shutdown -r now "Reboot triggered by Ansible" && sleep 1'
   async: 1
   poll: 0
-  ignore_errors: true
+  ignore_errors: true # noqa ignore-errors
 
 # We can't reboot our CI container, restart SSH instead
 - name: Restart SSH
@@ -20,8 +20,8 @@
 
 - name: Wait for reboot
   listen: "Reboot"
-  local_action:
-    module: ansible.builtin.wait_for
+  delegate_to: localhost
+  ansible.builtin.wait_for:
     port: "{{ ssh.port }}"
     host: "{{ static_ip_address_to_assign }}"
     delay: 10
