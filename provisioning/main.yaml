@@ -1,10 +1,10 @@
-- name: Full instalation playbook
+- name: Setup system
   hosts: dhcphomeserver
   roles:
     - role: system
     - role: docker
 
-- name: Test with SSH
+- name: Install applications
   hosts: homeserver
   roles:
     - role: apps

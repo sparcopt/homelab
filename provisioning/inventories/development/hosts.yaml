@@ -1,12 +1,21 @@
 dhcphomeserver:
   hosts:
-    localhost:
+    dhcp_debian_container:
+      ansible_host: localhost
       ansible_ssh_pass: 123
+      static_ip_address_to_assign: 127.0.0.1
 
 homeserver:
   hosts:
-    127.0.0.1:
+    debian_container:
+      ansible_host: localhost
       ansible_ssh_private_key_file: "~/.ssh/raspiviseu_rsa"
+
+local:
+  hosts:
+    local_machine:
+      ansible_host: localhost
+      ansible_connection: local
 
 all:
   vars:

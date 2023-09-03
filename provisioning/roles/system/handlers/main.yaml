@@ -1,0 +1,28 @@
+# Tasks defined here will run in the order they are defined
+# They will run once per playbook and at the very end
+
+# Only reboot on production
+- name: Reboot # noqa no-changed-when
+  listen: "Reboot"
+  when: inventory_dir.split('/')[-1] == 'production'
+  ansible.builtin.shell: 'sleep 1 && shutdown -r now "Reboot triggered by Ansible" && sleep 1'
+  async: 1
+  poll: 0
+  ignore_errors: true # noqa ignore-errors
+
+# We can't reboot our CI container, restart SSH instead
+- name: Restart SSH
+  listen: "Reboot"
+  when: inventory_dir.split('/')[-1] != 'production'
+  ansible.builtin.service:
+    name: ssh
+    state: restarted
+
+- name: Wait for reboot
+  listen: "Reboot"
+  delegate_to: localhost
+  ansible.builtin.wait_for:
+    port: "{{ ssh.port }}"
+    host: "{{ static_ip_address_to_assign }}"
+    delay: 10
+    timeout: 60
